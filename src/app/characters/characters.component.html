@@ -1,0 +1,29 @@
+<h2>Personnages</h2>
+<div class="row">
+  <div class="card-group">
+    <div class="col-4" *ngFor="let character of characters">
+      <div class="card">
+        <img src="{{character.img}}" class="card-img-top img-card" alt="{{character.nickname}}">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
+            This content is a little bit longer.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>
+  <ul>
+    <li *ngFor="let character of characters">
+      <a routerLink="/detail/{{character.char_id}}">
+        <span class="badge">{{character.char_id}}</span> {{character.name}}
+      </a>
+
+    </li>
+
+  </ul>
