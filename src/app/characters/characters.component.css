@@ -1,3 +1,38 @@
-img-card{
-  max-width: 4rem;
+.bb-card{
+  width: calc(100% - 40px);
+  height: 40rem;
+  margin: 20px;
+}
+
+.bb-card img{
+  height: 30rem;
+  object-fit: cover;
+  object-position: top;
+  cursor: pointer;
+}
+
+.pulse:hover,
+.pulse:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(#fff,0);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--hover); }
+}
+
+.card-body{
+  position: relative;
+}
+
+.bb-status{
+  display: block;
+  width: calc(100% - 2rem);
+  text-align: center;
+  position: absolute;
+  bottom: 1rem;
+}
+
+.DG-pagination{
+
 }

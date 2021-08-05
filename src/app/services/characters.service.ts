@@ -9,7 +9,7 @@ import {Character} from "../model/character";
 })
 export class CharactersService {
 
-  private breakingBadApiUrl = 'https://www.breakingbadapi.com/api/characters';  // URL to web api
+  private breakingBadApiUrl = 'https://www.breakingbadapi.com/api/';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -17,9 +17,16 @@ export class CharactersService {
 
   /** GET characters from the Breaking bad API */
   getCharacters(): Observable<Character[]> {
-    return this.http.get<Character[]>(this.breakingBadApiUrl)
+    return this.http.get<Character[]>(this.breakingBadApiUrl + 'characters')
       .pipe(
-        catchError(this.handleError<Character[]>('getHeroes', []))
+        catchError(this.handleError<Character[]>('getCharacters', []))
+      );
+  }
+  /** GET characterById from the Breaking bad API */
+  getCharacterById(char_id: number): Observable<Character[]> {
+    return this.http.get<Character[]>(this.breakingBadApiUrl + 'characters/' + char_id)
+      .pipe(
+        catchError(this.handleError<Character[]>('getCharacterById'))
       );
   }
 
@@ -33,7 +40,6 @@ export class CharactersService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.log("coucou");
       console.error(error); // log to console instead
 
       // Let the app keep running by returning an empty result.

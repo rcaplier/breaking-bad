@@ -1,0 +1,13 @@
+<h2>Fiche détaillée</h2>
+<div class="row">
+  <div class="card-group" *ngIf="character != undefined">
+      <div class="card bb-card">
+        <img src="{{character.img}}" class="card-img-top pulse" alt="{{character.nickname}}">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{character.name}}</h5>
+          <p class="card-text">{{character.occupation}}</p>
+          <p class="card-text bb-status"><small class="text-muted mx-auto">{{character.status}}</small></p>
+        </div>
+      </div>
+  </div>
+</div>

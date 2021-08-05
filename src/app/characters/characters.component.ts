@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Character} from "../model/character";
 import {CharactersService} from "../services/characters.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-characters',
@@ -10,7 +11,10 @@ import {CharactersService} from "../services/characters.service";
 export class CharactersComponent implements OnInit {
   characters: Character[] = [];
 
-  constructor(private characterService: CharactersService) {
+  //pagination start
+  p = 1;
+
+  constructor(private characterService: CharactersService, private router: Router) {
   }
 
   ngOnInit() {
@@ -21,4 +25,7 @@ export class CharactersComponent implements OnInit {
     this.characterService.getCharacters().subscribe(characters => this.characters = characters)
   }
 
+  characterDetails(char_id: number) {
+    this.router.navigateByUrl("/characterDetails/" + char_id)
+  }
 }
