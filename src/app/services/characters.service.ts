@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError} from 'rxjs/operators';
-import {Observable, of} from "rxjs";
+import {catchError, tap} from 'rxjs/operators';
+import {Observable, of, Subject} from "rxjs";
 import {Character} from "../model/character";
 
 @Injectable({
@@ -11,9 +11,23 @@ export class CharactersService {
 
   private breakingBadApiUrl = 'https://www.breakingbadapi.com/api/';  // URL to web api
 
+  searchSource = new Subject<boolean>();
+  searched$ = this.searchSource.asObservable();
+
+  searchSourceValue:string ='';
+
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
+
+  searchValue(term: string): void {
+    this.searchSourceValue = term;
+  }
+
+
+  search(term: boolean): void {
+    this.searchSource.next(term);
+  }
 
   /** GET characters from the Breaking bad API */
   getCharacters(): Observable<Character[]> {
@@ -46,6 +60,16 @@ export class CharactersService {
       return of(result as T);
     };
   }
+
+  /* GET characters whose name contains search term */
+  getCharactersFiltred(): Observable<Character[]> {
+    if (!this.searchSourceValue.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Character[]>(`${this.breakingBadApiUrl}characters?name=${this.searchSourceValue}`);
+  }
+
 
   constructor(private http: HttpClient) {
   }

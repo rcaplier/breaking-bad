@@ -8,12 +8,14 @@ import {RouterModule} from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CharactersComponent,
-    CharacterDetailsComponent
+    CharacterDetailsComponent,
+    NavigationComponent
   ],
     imports: [
         BrowserModule,
